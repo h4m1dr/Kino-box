@@ -1,0 +1,15 @@
+name = "personal-watchlist-bot"
+main = "src/index.ts"
+compatibility_date = "2026-11-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "movie-watch"
+database_id = "REPLACE_WITH_D1_ID"
+
+[triggers]
+crons = ["0 7 * * *"] # daily airing reminder, 07:00 UTC — adjust to taste
+
+[vars]
+# Secrets go in .dev.vars / wrangler secret, never here:
+# TELEGRAM_TOKEN, TELEGRAM_WEBHOOK_SECRET, OWNER_ID, TMDB_API_KEY, SHEET_ID
