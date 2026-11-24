@@ -1,4 +1,4 @@
-# movie-bots
+# Kino-box
 
 Private — © All rights reserved. Not open source, no open licence.
 
