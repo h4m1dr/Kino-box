@@ -21,6 +21,8 @@ Three Telegram bots for films and series (see `docs/plan.md` for the full plan):
 
 ## Bot 1 — quick start (Phase 1)
 
+Full install guide (token file, parameterized commands): [INSTALL.md](INSTALL.md).
+
 ```bash
 cd apps/personal-bot
 npm install
