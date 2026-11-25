@@ -27,15 +27,16 @@ Generate the random secret with `openssl rand -hex 32` and keep it — the webho
 
 ## 3. Cloudflare and the database (once)
 
+Wrangler is **global** (v4) with named profiles — `cf1` is the first account (hamara), `cf2` is the second account, and **Kino-box lives on `cf2`**. The `cf2` shortcut runs `wrangler --profile cf2` from anywhere. Never use `npx wrangler` or `npm run deploy` here — those would run a stale local Wrangler without the profile. Login is already done (`wrangler auth list` shows both profiles); if a profile is ever missing, recreate it with `wrangler auth create cf2` while the browser is signed into that account and proxy env vars are unset.
+
 ```bash
-npx wrangler login
-npx wrangler d1 create movie-watch
+cf2 d1 create movie-watch
 ```
 
 Paste the returned `database_id` into `wrangler.toml` (replacing `REPLACE_WITH_D1_ID`). The database ID is not a secret, so it is safe to commit. Then apply the schema:
 
 ```bash
-npx wrangler d1 execute movie-watch --remote --file=schema.sql
+cf2 d1 execute movie-watch --remote --file=schema.sql
 ```
 
 ## 4. Upload the secrets
@@ -43,17 +44,17 @@ npx wrangler d1 execute movie-watch --remote --file=schema.sql
 Each value is pasted at the prompt — it never goes into git:
 
 ```bash
-npx wrangler secret put TELEGRAM_TOKEN
-npx wrangler secret put TELEGRAM_WEBHOOK_SECRET
-npx wrangler secret put OWNER_ID
-npx wrangler secret put TMDB_API_KEY
-npx wrangler secret put SHEET_ID
+cf2 secret put TELEGRAM_TOKEN
+cf2 secret put TELEGRAM_WEBHOOK_SECRET
+cf2 secret put OWNER_ID
+cf2 secret put TMDB_API_KEY
+cf2 secret put SHEET_ID
 ```
 
 ## 5. Deploy and connect the bot
 
 ```bash
-npm run deploy
+cf2 deploy
 ```
 
 Copy the printed `https://…workers.dev` URL into `WORKER_URL` in `.dev.vars`, then:
@@ -78,7 +79,7 @@ git pull
 cd apps/personal-bot
 npm install
 npm run check
-npm run deploy
+cf2 deploy
 ```
 
 If `schema.sql` changed, re-apply it (step 3) before deploying. If the worker URL or webhook secret changed, re-run `npm run webhook`.
