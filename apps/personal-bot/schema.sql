@@ -28,3 +28,27 @@ CREATE TABLE IF NOT EXISTS items (
 CREATE INDEX IF NOT EXISTS idx_items_title ON items(title);
 CREATE INDEX IF NOT EXISTS idx_items_imdb ON items(imdb_id);
 CREATE INDEX IF NOT EXISTS idx_items_seen ON items(seen);
+
+-- Phase 1 additions (add-only; items table unchanged).
+
+-- Add-flow previews waiting for ✅/❌ confirmation (payload = JSON).
+CREATE TABLE IF NOT EXISTS pending (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  payload TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Single-row conversational state: what input the bot is waiting for
+-- (rating / note / bookmark / mood_titles) and for which item.
+CREATE TABLE IF NOT EXISTS bot_state (
+  id INTEGER PRIMARY KEY CHECK (id = 1),
+  awaiting TEXT,
+  item_id INTEGER
+);
+
+-- Public-bot requests (Phase 3 stub: logged only).
+CREATE TABLE IF NOT EXISTS requests (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
