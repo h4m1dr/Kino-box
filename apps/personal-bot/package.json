@@ -1,1 +1,15 @@
-{"dependencies":{},"description":"Private Telegram watchlist bot — Phase 1. TypeScript, Cloudflare Workers + D1.","devDependencies":{"@cloudflare/workers-types":"^4.0.0","typescript":"^5.6.0","wrangler":"^3.0.0"},"name":"personal-watchlist-bot","private":true,"scripts":{"check":"tsc --noEmit","deploy":"wrangler deploy","dev":"wrangler dev","webhook":"bash scripts/set-webhook.sh"},"version":"0.1.0"}
+{
+  "dependencies": {},
+  "description": "Private Telegram watchlist bot — Phase 1. TypeScript, Cloudflare Workers + D1.",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "typescript": "^5.6.0"
+  },
+  "name": "personal-watchlist-bot",
+  "private": true,
+  "scripts": {
+    "check": "tsc --noEmit",
+    "webhook": "bash scripts/set-webhook.sh"
+  },
+  "version": "0.1.0"
+}

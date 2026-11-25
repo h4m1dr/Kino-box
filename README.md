@@ -27,12 +27,12 @@ Full install guide (token file, parameterized commands): [INSTALL.md](INSTALL.md
 cd apps/personal-bot
 npm install
 cp .dev.vars.example .dev.vars   # TELEGRAM_TOKEN, SHEET_ID, OWNER_ID
-npx wrangler d1 create movie-watch
-npx wrangler d1 execute movie-watch --file=schema.sql
-npm run dev
+cf2 d1 create movie-watch
+cf2 d1 execute movie-watch --remote --file=schema.sql
+wrangler dev --profile cf2
 ```
 
-Deploy (free, no card): `npx wrangler deploy`, then set the Telegram webhook
+Deploy (free, no card): `cf2 deploy` (global Wrangler profile cf2 — see INSTALL.md), then set the Telegram webhook
 to `https://<worker>.workers.dev/webhook` with a secret token.
 
 ## Layout
